@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Friendly Visualizer Recorder</title>
+    <title>Mobile Visualizer Studio Pro v3</title>
+    <!-- Memuat Google Fonts untuk variasi pilihan font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { margin: 0; background: #0b0b16; color: #fff; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        .container { width: 100%; max-width: 500px; background: #131326; padding: 20px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); border: 1px solid #252545; }
-        h2 { font-size: 18px; color: #00f0ff; margin-top: 0; text-align: center; text-transform: uppercase; }
-        .control-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        body { margin: 0; background: #07070f; color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 500px; background: #111122; padding: 15px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); border: 1px solid #222244; }
+        h2 { font-size: 16px; color: #00f0ff; margin-top: 0; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .control-group { margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px; }
         label { font-size: 11px; text-transform: uppercase; color: #8c8ca3; font-weight: bold; }
-        input[type="text"], input[type="file"], select { background: #1c1c38; border: 1px solid #32325d; color: #fff; padding: 12px; border-radius: 8px; font-size: 14px; width: 100%; }
-        .canvas-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; border: 1px solid #252545; }
+        input[type="text"], input[type="file"], select, input[type="range"] { background: #171733; border: 1px solid #2d2d5c; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; width: 100%; }
+        .canvas-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid #222244; }
         #canvas { width: 100%; height: 100%; display: block; }
-        .btn { background: #ff0055; color: #fff; border: none; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; text-transform: uppercase; width: 100%; transition: 0.2s; }
-        .btn:disabled { background: #252542; color: #5c5c7d; cursor: not-allowed; }
-        .status-box { background: #0b0b16; padding: 12px; border-radius: 8px; font-size: 13px; color: #a0a0c0; text-align: center; margin-top: 15px; line-height: 1.4; border: 1px solid #1c1c38; }
-        .progress-bar-container { width: 100%; background: #1c1c38; height: 8px; border-radius: 4px; overflow: hidden; display: none; margin-top: 10px; }
-        .progress-bar { width: 0%; height: 100%; background: #00f0ff; transition: width 0.1s linear; }
-        audio { width: 100%; margin-top: 10px; display: none; }
+        .btn { background: #ff0055; color: #fff; border: none; padding: 14px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; text-transform: uppercase; width: 100%; letter-spacing: 0.5px; }
+        .btn:disabled { background: #22223a; color: #525273; cursor: not-allowed; }
+        .status-box { background: #07070f; padding: 10px; border-radius: 6px; font-size: 12px; color: #a0a0c0; text-align: center; margin-top: 12px; line-height: 1.4; border: 1px solid #171733; }
+        .progress-bar-container { width: 100%; background: #171733; height: 6px; border-radius: 3px; overflow: hidden; display: none; margin-top: 8px; }
+        .progress-bar { width: 0%; height: 100%; background: #00f0ff; }
+        audio { display: none; }
+        .row { display: flex; gap: 10px; }
+        .row > div { flex: 1; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Mobile Visualizer Studio</h2>
+        <h2>Mobile Visualizer Studio v3</h2>
         
         <div class="canvas-container">
             <canvas id="canvas" width="1280" height="720"></canvas>
@@ -35,18 +39,63 @@
             <label>1. Pilih Lagu / Audio</label>
             <input type="file" id="audio-input" accept="audio/*">
         </div>
-        
-        <div class="control-group">
-            <label>Nama Artis & Judul</label>
-            <input type="text" id="artist-text" value="SRISP - Gravity of Light">
+
+        <div class="row">
+            <div class="control-group">
+                <label>Nama Artis</label>
+                <input type="text" id="artist-text" value="SRISP">
+            </div>
+            <div class="control-group">
+                <label>Judul Lagu</label>
+                <input type="text" id="title-text" value="Gravity of Light">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="control-group">
+                <label>Gaya Font</label>
+                <select id="font-select">
+                    <option value="bold 60px 'Montserrat'">Montserrat (Bold)</option>
+                    <option value="italic 60px 'Playfair Display'">Playfair (Elegant)</option>
+                    <option value="65px 'Bebas Neue'">Bebas Neue (Impact)</option>
+                    <option value="bold 50px 'Courier New'">Courier New (Retro)</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Posisi Tinggi Teks</label>
+                <input type="range" id="text-y-slider" min="100" max="650" value="560">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="control-group">
+                <label>Gaya Spektrum</label>
+                <select id="template-select">
+                    <option value="bar">Classic Music Bars</option>
+                    <option value="double-bar">Double Mirror Bars</option>
+                    <option value="wave">Waveform Line</option>
+                    <option value="center">Center Pulse Line</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Tema Warna</label>
+                <select id="color-select">
+                    <option value="#00f0ff|#0055ff">Cyan Neon</option>
+                    <option value="#ff0055|#880022">Ruby Red</option>
+                    <option value="#00ff66|#006622">Emerald Green</option>
+                    <option value="#ffffff|#444444">Pure White</option>
+                </select>
+            </div>
         </div>
 
         <div class="control-group">
-            <label>Gaya Spektrum</label>
-            <select id="template-select">
-                <option value="bar">Music Bars</option>
-                <option value="wave">Waveform / Garis</option>
+            <label>Layar Background</label>
+            <select id="bg-select">
+                <option value="space">Default: Deep Space Black</option>
+                <option value="cyber">Default: Cyberpunk Purple</option>
+                <option value="custom">-- Unggah Foto Sendiri --</option>
             </select>
+            <input type="file" id="bg-custom-input" accept="image/*" style="display: none; margin-top: 5px;">
         </div>
 
         <button id="action-btn" class="btn" disabled>Pilih Musik Dahulu</button>
@@ -55,7 +104,7 @@
             <div class="progress-bar" id="progress-bar"></div>
         </div>
         
-        <div id="status-text" class="status-box">Silakan masukkan file audio untuk memulai di HP.</div>
+        <div id="status-text" class="status-box">Silakan masukkan file audio untuk memulai studio.</div>
         
         <audio id="audio-player" controls></audio>
     </div>
@@ -63,7 +112,14 @@
     <script>
         const audioInput = document.getElementById('audio-input');
         const artistText = document.getElementById('artist-text');
+        const titleText = document.getElementById('title-text');
+        const fontSelect = document.getElementById('font-select');
+        const textYSlider = document.getElementById('text-y-slider');
         const templateSelect = document.getElementById('template-select');
+        const colorSelect = document.getElementById('color-select');
+        const bgSelect = document.getElementById('bg-select');
+        const bgCustomInput = document.getElementById('bg-custom-input');
+        
         const actionBtn = document.getElementById('action-btn');
         const statusText = document.getElementById('status-text');
         const progressContainer = document.getElementById('progress-container');
@@ -72,113 +128,193 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        let audioCtx = null;
-        let analyser = null;
-        let source = null;
-        let mediaRecorder = null;
-        let recordedChunks = [];
-        let animationFrameId = null;
-        let isRecording = false;
+        let audioCtx = null, analyser = null, source = null, mediaRecorder = null;
+        let recordedChunks = [], animationFrameId = null, isRecording = false;
+        let uploadedBgImg = null;
 
-        // Render Preview Awal
-        function drawPreview() {
-            ctx.fillStyle = "#06060e";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = "rgba(255,255,255,0.1)";
-            ctx.fillRect(100, 400, 1080, 20);
+        // Mengatur penampilan input file custom background
+        bgSelect.addEventListener('change', function() {
+            if (this.value === 'custom') {
+                bgCustomInput.style.display = 'block';
+            } else {
+                bgCustomInput.style.display = 'none';
+                uploadedBgImg = null;
+                drawPreview();
+            }
+        });
 
-            ctx.font = "bold 50px sans-serif";
-            ctx.fillStyle = "#ffffff";
-            ctx.textAlign = "center";
-            ctx.fillText(artistText.value.toUpperCase(), canvas.width / 2, canvas.height / 2);
+        bgCustomInput.addEventListener('change', function() {
+            if (this.files.length === 0) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                uploadedBgImg = new Image();
+                uploadedBgImg.src = e.target.result;
+                uploadedBgImg.onload = drawPreview;
+            };
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        // Gambar Latar Belakang berdasarkan pilihan
+        function drawBackground() {
+            const mode = bgSelect.value;
+            if (mode === 'custom' && uploadedBgImg) {
+                ctx.drawImage(uploadedBgImg, 0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "rgba(7, 7, 15, 0.6)"; // Overlay gelap agar teks terbaca
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (mode === 'cyber') {
+                let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                grad.addColorStop(0, "#1a002c");
+                grad.addColorStop(1, "#050014");
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                // 'space' / default dark
+                ctx.fillStyle = "#06060c";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
         }
-        drawPreview();
-        artistText.addEventListener('input', drawPreview);
-        templateSelect.addEventListener('change', drawPreview);
 
-        // Membaca file Audio di HP
+        // Fungsi Render Pratinjau Desain Teks & Komponen Static
+        function drawPreview() {
+            drawBackground();
+
+            // Setup Warna dan Glow dari pilihan select
+            const colors = colorSelect.value.split('|');
+            ctx.fillStyle = colors[0];
+            ctx.strokeStyle = colors[0];
+
+            // Pratinjau bentuk spektrum palsu sebelum tombol rekam ditekan
+            const textY = parseInt(textYSlider.value);
+            ctx.fillRect(140, textY - 120, 1000, 4);
+
+            // Render Teks Dinamis Mengikuti Huruf Besar & Kecil Input User
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#ffffff";
+            
+            // Render Nama Artis
+            ctx.font = fontSelect.value;
+            ctx.fillText(artistText.value, canvas.width / 2, textY);
+            
+            // Render Judul Lagu (Lebih Kecil di Bawah Artis)
+            ctx.font = "35px sans-serif";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.fillText(titleText.value, canvas.width / 2, textY + 55);
+        }
+
+        // Hubungkan semua kontrol UI ke sistem refresh preview
+        [artistText, titleText, fontSelect, textYSlider, templateSelect, colorSelect, bgSelect].forEach(element => {
+            element.addEventListener('input', drawPreview);
+            element.addEventListener('change', drawPreview);
+        });
+
+        // Trigger deteksi file audio masuk
         audioInput.addEventListener('change', function() {
             if (this.files.length === 0) return;
-            const file = this.files[0];
-            audioPlayer.src = URL.createObjectURL(file);
-            
-            statusText.innerText = "Audio siap! Klik tombol di bawah untuk mulai merekam video.";
+            audioPlayer.src = URL.createObjectURL(this.files[0]);
+            statusText.innerText = "Lagu berhasil dimuat! Siap direkam.";
             actionBtn.disabled = false;
             actionBtn.innerText = "Mulai Rekam Video";
             drawPreview();
         });
 
-        // Loop Gambar Real-time yang kompatibel dengan HP
+        // Loop Animasi Spektrum Real-time saat Perekaman Berjalan
         function renderLoop() {
             animationFrameId = requestAnimationFrame(renderLoop);
             
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
             
-            if (templateSelect.value === 'bar') {
-                analyser.getByteFrequencyData(dataArray);
-            } else {
+            if (templateSelect.value === 'wave' || templateSelect.value === 'center') {
                 analyser.getByteTimeDomainData(dataArray);
+            } else {
+                analyser.getByteFrequencyData(dataArray);
             }
 
-            // Bersihkan Background
-            ctx.fillStyle = "#06060e";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Bersihkan frame & pasang Background
+            drawBackground();
 
-            // Gambar Spektrum Musik
-            ctx.fillStyle = "#00f0ff";
-            ctx.strokeStyle = "#00f0ff";
+            const colors = colorSelect.value.split('|');
+            ctx.fillStyle = colors[0];
+            ctx.strokeStyle = colors[0];
             ctx.shadowBlur = 20;
-            ctx.shadowColor = "#00f0ff";
+            ctx.shadowColor = colors[0];
 
-            if (templateSelect.value === 'bar') {
-                const barWidth = (canvas.width / 60);
+            const style = templateSelect.value;
+            const textY = parseInt(textYSlider.value);
+
+            if (style === 'bar') {
+                const barWidth = (canvas.width / 64);
                 let x = 0;
-                for (let i = 0; i < 60; i++) {
-                    let barHeight = (dataArray[i] / 255) * 300;
-                    ctx.fillRect(x, canvas.height * 0.4 - (barHeight/2), barWidth - 4, barHeight + 10);
+                for (let i = 0; i < 64; i++) {
+                    let barHeight = (dataArray[i] / 255) * 320;
+                    ctx.fillRect(x, (textY - 140) - barHeight, barWidth - 4, barHeight + 5);
                     x += barWidth;
                 }
-            } else {
+            } else if (style === 'double-bar') {
+                const barWidth = (canvas.width / 64);
+                let x = 0;
+                for (let i = 0; i < 64; i++) {
+                    let barHeight = (dataArray[i] / 255) * 160;
+                    // Atas Mirror
+                    ctx.fillRect(x, (textY - 140) - barHeight, barWidth - 4, barHeight);
+                    // Bawah Mirror
+                    ctx.fillRect(x, (textY - 140), barWidth - 4, barHeight);
+                    x += barWidth;
+                }
+            } else if (style === 'wave') {
                 ctx.lineWidth = 6;
                 ctx.beginPath();
                 const sliceWidth = canvas.width / bufferLength;
                 let x = 0;
                 for (let i = 0; i < bufferLength; i++) {
                     let v = dataArray[i] / 128.0;
-                    let y = v * (canvas.height / 2) * 0.8;
+                    let y = (v * 150) + (textY - 200);
+                    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    x += sliceWidth;
+                }
+                ctx.stroke();
+            } else if (style === 'center') {
+                ctx.lineWidth = 8;
+                ctx.beginPath();
+                const sliceWidth = canvas.width / bufferLength;
+                let x = 0;
+                for (let i = 0; i < bufferLength; i++) {
+                    let v = dataArray[i] / 128.0;
+                    let y = (textY - 140) + (v - 1.0) * 400; // Efek lonjakan dari poros tengah
                     if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
                     x += sliceWidth;
                 }
                 ctx.stroke();
             }
-            ctx.shadowBlur = 0;
 
-            // Gambar Teks
-            ctx.font = "bold 55px sans-serif";
-            ctx.fillStyle = "#ffffff";
+            ctx.shadowBlur = 0; // Matikan glow agar teks tajam dan bersih
+
+            // Render Hasil Teks Gabungan Akhir
             ctx.textAlign = "center";
-            ctx.fillText(artistText.value.toUpperCase(), canvas.width / 2, canvas.height * 0.75);
+            ctx.fillStyle = "#ffffff";
+            ctx.font = fontSelect.value;
+            ctx.fillText(artistText.value, canvas.width / 2, textY);
+            
+            ctx.font = "35px sans-serif";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.fillText(titleText.value, canvas.width / 2, textY + 55);
 
-            // Update Persentase Berdasarkan Durasi Lagu Lagu
+            // Hitung dan Perbarui Bar Persentase Progres Real-time HP
             if (audioPlayer.duration) {
                 const pct = (audioPlayer.currentTime / audioPlayer.duration) * 100;
                 progressBar.style.width = pct + "%";
-                statusText.innerText = `Sedang Merekam: ${Math.floor(pct)}% (${Math.floor(audioPlayer.currentTime)}s / ${Math.floor(audioPlayer.duration)}s)`;
+                statusText.innerText = `Memproses Rekaman: ${Math.floor(pct)}% (${Math.floor(audioPlayer.currentTime)}s / ${Math.floor(audioPlayer.duration)}s)`;
             }
         }
 
-        // Aksi Tombol Rekam
+        // Eksekusi Perekaman Media Browser Mobile
         actionBtn.addEventListener('click', async () => {
             if (!isRecording) {
-                // Mulai Rekam
                 isRecording = true;
                 actionBtn.disabled = true;
                 progressContainer.style.display = "block";
                 recordedChunks = [];
 
-                // Setup Web Audio API versi HP
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                     analyser = audioCtx.createAnalyser();
@@ -188,22 +324,19 @@
                     analyser.connect(audioCtx.destination);
                 }
 
-                // Gabungkan Jalur Video Canvas & Jalur Audio Player
-                const videoStream = canvas.captureStream(30); 
+                const videoStream = canvas.captureStream(30);
                 const audioStream = audioPlayer.captureStream ? audioPlayer.captureStream() : audioPlayer.webkitCaptureStream();
                 
                 const combinedStream = new MediaStream();
                 videoStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
                 audioStream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
 
-                // Tentukan format rekam terbaik untuk HP
                 let options = { mimeType: 'video/webm;codecs=vp8' };
                 if (!MediaRecorder.isTypeSupported(options.mimeType)) {
                     options = { mimeType: 'video/mp4' };
                 }
 
                 mediaRecorder = new MediaRecorder(combinedStream, options);
-                
                 mediaRecorder.ondataavailable = (e) => {
                     if (e.data && e.data.size > 0) recordedChunks.push(e.data);
                 };
@@ -213,35 +346,35 @@
                     const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType });
                     const url = URL.createObjectURL(blob);
                     
-                    // Unduh Otomatis di HP
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `${artistText.value.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.mp4`;
+                    a.download = `${artistText.value.trim()}_${titleText.value.trim()}.mp4`;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
 
-                    statusText.innerText = "Selesai! Video berhasil direkam dan diunduh ke HP Anda.";
+                    statusText.innerText = "Selesai! Video visualisator berhasil masuk ke folder unduhan HP Anda.";
                     actionBtn.disabled = false;
                     actionBtn.innerText = "Mulai Rekam Video";
-                    progressContainer.style.style.display = "none";
+                    progressContainer.style.display = "none";
                     isRecording = false;
                 };
 
-                // Jalankan Pemutar dan Perekam secara sinkron
                 audioPlayer.play();
                 mediaRecorder.start();
                 renderLoop();
-                actionBtn.innerText = "Merekam... Jangan Tutup Layar";
+                actionBtn.innerText = "Sedang Merekam... Jangan Keluar Browser";
             }
         });
 
-        // Jika lagu habis, otomatis stop rekaman dan download
         audioPlayer.addEventListener('ended', () => {
             if (mediaRecorder && mediaRecorder.state !== "inactive") {
                 mediaRecorder.stop();
             }
         });
+
+        // Render penyesuaian dimensi kanvas pertama kali dimuat
+        drawPreview();
     </script>
 </body>
 </html>
