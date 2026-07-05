@@ -3,303 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Visualizer Studio Pro v3</title>
-    <!-- Memuat Google Fonts untuk variasi pilihan font -->
+    <title>Mobile Visualizer Pro - Advanced Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { margin: 0; background: #07070f; color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 500px; background: #111122; padding: 15px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); border: 1px solid #222244; }
-        h2 { font-size: 16px; color: #00f0ff; margin-top: 0; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-        .control-group { margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px; }
-        label { font-size: 11px; text-transform: uppercase; color: #8c8ca3; font-weight: bold; }
-        input[type="text"], input[type="file"], select, input[type="range"] { background: #171733; border: 1px solid #2d2d5c; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; width: 100%; }
-        .canvas-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid #222244; }
+        body { margin: 0; background: #05050a; color: #fff; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 500px; background: #0f0f1e; padding: 15px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); border: 1px solid #1f1f3a; }
+        h2 { font-size: 15px; color: #00f0ff; margin-top: 0; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .control-group { margin-bottom: 10px; display: flex; flex-direction: column; gap: 3px; }
+        label { font-size: 10px; text-transform: uppercase; color: #8c8ca3; font-weight: bold; }
+        input[type="text"], input[type="file"], select, input[type="range"] { background: #15152a; border: 1px solid #25254a; color: #fff; padding: 8px; border-radius: 6px; font-size: 12px; width: 100%; }
+        .canvas-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid #25254a; }
         #canvas { width: 100%; height: 100%; display: block; }
-        .btn { background: #ff0055; color: #fff; border: none; padding: 14px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; text-transform: uppercase; width: 100%; letter-spacing: 0.5px; }
-        .btn:disabled { background: #22223a; color: #525273; cursor: not-allowed; }
-        .status-box { background: #07070f; padding: 10px; border-radius: 6px; font-size: 12px; color: #a0a0c0; text-align: center; margin-top: 12px; line-height: 1.4; border: 1px solid #171733; }
-        .progress-bar-container { width: 100%; background: #171733; height: 6px; border-radius: 3px; overflow: hidden; display: none; margin-top: 8px; }
+        .btn { background: #ff0055; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; text-transform: uppercase; width: 100%; }
+        .btn:disabled { background: #1b1b30; color: #4a4a6a; cursor: not-allowed; }
+        .status-box { background: #05050a; padding: 8px; border-radius: 6px; font-size: 11px; color: #a0a0c0; text-align: center; margin-top: 10px; border: 1px solid #15152a; }
+        .progress-bar-container { width: 100%; background: #15152a; height: 5px; border-radius: 3px; overflow: hidden; display: none; margin-top: 8px; }
         .progress-bar { width: 0%; height: 100%; background: #00f0ff; }
         audio { display: none; }
-        .row { display: flex; gap: 10px; }
+        .row { display: flex; gap: 8px; }
         .row > div { flex: 1; }
+        .section-title { font-size: 11px; color: #ff0055; font-weight: bold; margin: 10px 0 5px 0; text-transform: uppercase; border-bottom: 1px solid #25254a; padding-bottom: 2px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Mobile Visualizer Studio v3</h2>
+        <h2>Mobile Studio Pro v4</h2>
         
         <div class="canvas-container">
             <canvas id="canvas" width="1280" height="720"></canvas>
         </div>
 
         <div class="control-group">
-            <label>1. Pilih Lagu / Audio</label>
+            <label>1. Pilih Musik</label>
             <input type="file" id="audio-input" accept="audio/*">
         </div>
 
+        <div class="section-title">Konfigurasi Teks</div>
         <div class="row">
-            <div class="control-group">
-                <label>Nama Artis</label>
-                <input type="text" id="artist-text" value="SRISP">
-            </div>
-            <div class="control-group">
-                <label>Judul Lagu</label>
-                <input type="text" id="title-text" value="Gravity of Light">
-            </div>
+            <div class="control-group"><label>Artis</label><input type="text" id="artist-text" value="SRISP"></div>
+            <div class="control-group"><label>Judul</label><input type="text" id="title-text" value="Gravity of Light"></div>
         </div>
-
         <div class="row">
             <div class="control-group">
                 <label>Gaya Font</label>
                 <select id="font-select">
-                    <option value="bold 60px 'Montserrat'">Montserrat (Bold)</option>
-                    <option value="italic 60px 'Playfair Display'">Playfair (Elegant)</option>
-                    <option value="65px 'Bebas Neue'">Bebas Neue (Impact)</option>
-                    <option value="bold 50px 'Courier New'">Courier New (Retro)</option>
+                    <option value="bold 60px 'Montserrat'">Montserrat</option>
+                    <option value="italic 60px 'Playfair Display'">Playfair</option>
+                    <option value="65px 'Bebas Neue'">Bebas Neue</option>
+                    <option value="bold 50px 'Courier New'">Courier New</option>
                 </select>
             </div>
-            <div class="control-group">
-                <label>Posisi Tinggi Teks</label>
-                <input type="range" id="text-y-slider" min="100" max="650" value="560">
-            </div>
+            <div class="control-group"><label>Teks Kiri-Kanan</label><input type="range" id="text-x-slider" min="100" max="1180" value="640"></div>
+            <div class="control-group"><label>Teks Atas-Bawah</label><input type="range" id="text-y-slider" min="100" max="680" value="540"></div>
         </div>
 
+        <div class="section-title">Konfigurasi Grafik Spektrum</div>
         <div class="row">
             <div class="control-group">
-                <label>Gaya Spektrum</label>
+                <label>Bentuk Spektrum</label>
                 <select id="template-select">
                     <option value="bar">Classic Music Bars</option>
-                    <option value="double-bar">Double Mirror Bars</option>
-                    <option value="wave">Waveform Line</option>
-                    <option value="center">Center Pulse Line</option>
+                    <option value="double-bar">Mirror Twin Bars</option>
+                    <option value="updown">Up-Down Equalizer</option>
+                    <option value="wave">Waveform Glowing Line</option>
+                    <option value="spike">Spike Pulse Matrix</option>
+                    <option value="circle">Circular Aura Rhythm</option>
                 </select>
             </div>
             <div class="control-group">
-                <label>Tema Warna</label>
+                <label>Skema Warna (Transparan)</label>
                 <select id="color-select">
-                    <option value="#00f0ff|#0055ff">Cyan Neon</option>
-                    <option value="#ff0055|#880022">Ruby Red</option>
-                    <option value="#00ff66|#006622">Emerald Green</option>
-                    <option value="#ffffff|#444444">Pure White</option>
+                    <option value="rgba(0,240,255,0.65)">Neon Cyan</option>
+                    <option value="rgba(255,0,85,0.65)">Ruby Red</option>
+                    <option value="rgba(0,255,102,0.65)">Lime Emerald</option>
+                    <option value="rgba(255,255,255,0.55)">Crystal White</option>
                 </select>
             </div>
         </div>
+        <div class="row">
+            <div class="control-group"><label>Posisi Tinggi/Rendah</label><input type="range" id="spec-y-slider" min="50" max="670" value="340"></div>
+            <div class="control-group"><label>Lebar Bentangan</label><input type="range" id="spec-w-slider" min="400" max="1280" value="1280"></div>
+            <div class="control-group"><label>Sensitivitas Tinggi</label><input type="range" id="spec-h-slider" min="50" max="500" value="260"></div>
+        </div>
 
+        <div class="section-title">Latar Belakang & Efek</div>
         <div class="control-group">
-            <label>Layar Background</label>
             <select id="bg-select">
-                <option value="space">Default: Deep Space Black</option>
-                <option value="cyber">Default: Cyberpunk Purple</option>
-                <option value="custom">-- Unggah Foto Sendiri --</option>
+                <option value="dj">Default: Digital DJ Controller Console</option>
+                <option value="custom">-- Gunakan Foto Kustom Anda --</option>
             </select>
             <input type="file" id="bg-custom-input" accept="image/*" style="display: none; margin-top: 5px;">
         </div>
 
         <button id="action-btn" class="btn" disabled>Pilih Musik Dahulu</button>
+        <div class="progress-bar-container" id="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
+        <div id="status-text" class="status-box">Menunggu file audio untuk merender efek bintang...</div>
         
-        <div class="progress-bar-container" id="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        
-        <div id="status-text" class="status-box">Silakan masukkan file audio untuk memulai studio.</div>
-        
-        <audio id="audio-player" controls></audio>
+        <audio id="audio-player"></audio>
     </div>
 
     <script>
-        const audioInput = document.getElementById('audio-input');
-        const artistText = document.getElementById('artist-text');
-        const titleText = document.getElementById('title-text');
-        const fontSelect = document.getElementById('font-select');
-        const textYSlider = document.getElementById('text-y-slider');
-        const templateSelect = document.getElementById('template-select');
-        const colorSelect = document.getElementById('color-select');
-        const bgSelect = document.getElementById('bg-select');
-        const bgCustomInput = document.getElementById('bg-custom-input');
+        const canvas = document.getElementById('canvas'); const ctx = canvas.getContext('2d');
+        const audioInput = document.getElementById('audio-input'); const artistText = document.getElementById('artist-text');
+        const titleText = document.getElementById('title-text'); const fontSelect = document.getElementById('font-select');
+        const textXSlider = document.getElementById('text-x-slider'); const textYSlider = document.getElementById('text-y-slider');
+        const templateSelect = document.getElementById('template-select'); const colorSelect = document.getElementById('color-select');
+        const specYSlider = document.getElementById('spec-y-slider'); const specWSlider = document.getElementById('spec-w-slider');
+        const specHSlider = document.getElementById('spec-h-slider'); const bgSelect = document.getElementById('bg-select');
+        const bgCustomInput = document.getElementById('bg-custom-input'); const actionBtn = document.getElementById('action-btn');
+        const statusText = document.getElementById('status-text'); const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar'); const audioPlayer = document.getElementById('audio-player');
+
+        let audioCtx = null, analyser = null, source = null, mediaRecorder = null, recordedChunks = [], animationFrameId = null, isRecording = false, uploadedBgImg = null;
         
-        const actionBtn = document.getElementById('action-btn');
-        const statusText = document.getElementById('status-text');
-        const progressContainer = document.getElementById('progress-container');
-        const progressBar = document.getElementById('progress-bar');
-        const audioPlayer = document.getElementById('audio-player');
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+        // Inisialisasi data partikel bintang jatuh
+        const particles = [];
+        for(let i=0; i<60; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                speed: Math.random() * 2 + 1,
+                size: Math.random() * 3 + 1,
+                alpha: Math.random() * 0.5 + 0.3
+            });
+        }
 
-        let audioCtx = null, analyser = null, source = null, mediaRecorder = null;
-        let recordedChunks = [], animationFrameId = null, isRecording = false;
-        let uploadedBgImg = null;
-
-        // Mengatur penampilan input file custom background
         bgSelect.addEventListener('change', function() {
-            if (this.value === 'custom') {
-                bgCustomInput.style.display = 'block';
-            } else {
-                bgCustomInput.style.display = 'none';
-                uploadedBgImg = null;
-                drawPreview();
-            }
+            bgCustomInput.style.display = (this.value === 'custom') ? 'block' : 'none';
+            if(this.value !== 'custom') { uploadedBgImg = null; drawPreview(); }
         });
 
         bgCustomInput.addEventListener('change', function() {
             if (this.files.length === 0) return;
             const reader = new FileReader();
             reader.onload = e => {
-                uploadedBgImg = new Image();
-                uploadedBgImg.src = e.target.result;
-                uploadedBgImg.onload = drawPreview;
+                uploadedBgImg = new Image(); uploadedBgImg.src = e.target.result; uploadedBgImg.onload = drawPreview;
             };
             reader.readAsDataURL(this.files[0]);
         });
 
-        // Gambar Latar Belakang berdasarkan pilihan
-        function drawBackground() {
-            const mode = bgSelect.value;
-            if (mode === 'custom' && uploadedBgImg) {
-                ctx.drawImage(uploadedBgImg, 0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "rgba(7, 7, 15, 0.6)"; // Overlay gelap agar teks terbaca
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            } else if (mode === 'cyber') {
-                let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-                grad.addColorStop(0, "#1a002c");
-                grad.addColorStop(1, "#050014");
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            } else {
-                // 'space' / default dark
-                ctx.fillStyle = "#06060c";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Gambar Konsol DJ menggunakan canvas vector grafis transparan
+        function drawDJConsole() {
+            ctx.fillStyle = "#04040a"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Deck Kiri & Kanan
+            ctx.strokeStyle = "rgba(45, 45, 80, 0.4)"; ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.arc(280, 360, 160, 0, Math.PI * 2); ctx.stroke();
+            ctx.beginPath(); ctx.arc(1000, 360, 160, 0, Math.PI * 2); ctx.stroke();
+            // Grid Mixer Tengah
+            ctx.fillStyle = "rgba(15, 15, 30, 0.5)"; ctx.fillRect(520, 150, 240, 420);
+            ctx.strokeRect(520, 150, 240, 420);
+            // Garis Variasi Fader Mixer
+            for(let i=0; i<4; i++) {
+                ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+                ctx.fillRect(550 + (i*50), 380, 8, 120);
             }
         }
 
-        // Fungsi Render Pratinjau Desain Teks & Komponen Static
-        function drawPreview() {
-            drawBackground();
-
-            // Setup Warna dan Glow dari pilihan select
-            const colors = colorSelect.value.split('|');
-            ctx.fillStyle = colors[0];
-            ctx.strokeStyle = colors[0];
-
-            // Pratinjau bentuk spektrum palsu sebelum tombol rekam ditekan
-            const textY = parseInt(textYSlider.value);
-            ctx.fillRect(140, textY - 120, 1000, 4);
-
-            // Render Teks Dinamis Mengikuti Huruf Besar & Kecil Input User
-            ctx.textAlign = "center";
-            ctx.fillStyle = "#ffffff";
-            
-            // Render Nama Artis
-            ctx.font = fontSelect.value;
-            ctx.fillText(artistText.value, canvas.width / 2, textY);
-            
-            // Render Judul Lagu (Lebih Kecil di Bawah Artis)
-            ctx.font = "35px sans-serif";
-            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-            ctx.fillText(titleText.value, canvas.width / 2, textY + 55);
+        function drawBackground() {
+            if (bgSelect.value === 'custom' && uploadedBgImg) {
+                ctx.drawImage(uploadedBgImg, 0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "rgba(5, 5, 12, 0.5)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                drawDJConsole();
+            }
         }
 
-        // Hubungkan semua kontrol UI ke sistem refresh preview
-        [artistText, titleText, fontSelect, textYSlider, templateSelect, colorSelect, bgSelect].forEach(element => {
-            element.addEventListener('input', drawPreview);
-            element.addEventListener('change', drawPreview);
+        // Kelola jalannya bintang jatuh terpengaruh irama audio
+        function updateAndDrawParticles(audioIntensity) {
+            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            particles.forEach(p => {
+                // Kecepatan & pendaran partikel bertambah cepat mengikuti ketukan lagu
+                let currentSpeed = p.speed + (audioIntensity * 12);
+                p.y += currentSpeed;
+                if(p.y > canvas.height) {
+                    p.y = 0; p.x = Math.random() * canvas.width;
+                }
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size + (audioIntensity * 6), 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha + audioIntensity)})`;
+                ctx.fill();
+            });
+        }
+
+        function drawPreview() {
+            drawBackground();
+            updateAndDrawParticles(0.05); // simulasi beat default
+
+            ctx.fillStyle = colorSelect.value;
+            ctx.strokeStyle = colorSelect.value;
+            const textX = parseInt(textXSlider.value);
+            const textY = parseInt(textYSlider.value);
+
+            // Cetak Teks Gabungan Sesuai Huruf Input User
+            ctx.textAlign = "center"; ctx.fillStyle = "#ffffff";
+            ctx.font = fontSelect.value; ctx.fillText(artistText.value, textX, textY);
+            ctx.font = "35px sans-serif"; ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.fillText(titleText.value, textX, textY + 50);
+        }
+
+        [artistText, titleText, fontSelect, textXSlider, textYSlider, templateSelect, colorSelect, specYSlider, specWSlider, specHSlider, bgSelect].forEach(el => {
+            el.addEventListener('input', drawPreview); el.addEventListener('change', drawPreview);
         });
 
-        // Trigger deteksi file audio masuk
         audioInput.addEventListener('change', function() {
             if (this.files.length === 0) return;
             audioPlayer.src = URL.createObjectURL(this.files[0]);
-            statusText.innerText = "Lagu berhasil dimuat! Siap direkam.";
-            actionBtn.disabled = false;
-            actionBtn.innerText = "Mulai Rekam Video";
+            statusText.innerText = "Lagu siap diolah! Klik Rekam Video.";
+            actionBtn.disabled = false; actionBtn.innerText = "Mulai Rekam Video";
             drawPreview();
         });
 
-        // Loop Animasi Spektrum Real-time saat Perekaman Berjalan
         function renderLoop() {
             animationFrameId = requestAnimationFrame(renderLoop);
-            
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
             
-            if (templateSelect.value === 'wave' || templateSelect.value === 'center') {
+            if (templateSelect.value === 'wave') {
                 analyser.getByteTimeDomainData(dataArray);
             } else {
                 analyser.getByteFrequencyData(dataArray);
             }
 
-            // Bersihkan frame & pasang Background
-            drawBackground();
+            // Hitung rata-rata volume audio untuk memicu getaran bintang jatuh
+            let sum = 0;
+            for(let i=0; i<80; i++) sum += dataArray[i];
+            let audioIntensity = (sum / 80) / 255; // rentang 0.0 s/d 1.0
 
-            const colors = colorSelect.value.split('|');
-            ctx.fillStyle = colors[0];
-            ctx.strokeStyle = colors[0];
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = colors[0];
+            drawBackground();
+            updateAndDrawParticles(audioIntensity);
+
+            // Ambil Parameter Slider Spektrum Dinamis
+            const specY = parseInt(specYSlider.value);
+            const specW = parseInt(specWSlider.value);
+            const specH = parseInt(specHSlider.value);
+            const chosenColor = colorSelect.value;
+
+            ctx.fillStyle = chosenColor; ctx.strokeStyle = chosenColor;
+            ctx.lineWidth = 5; ctx.shadowBlur = 15; ctx.shadowColor = chosenColor;
 
             const style = templateSelect.value;
-            const textY = parseInt(textYSlider.value);
+            const startX = (canvas.width - specW) / 2;
 
             if (style === 'bar') {
-                const barWidth = (canvas.width / 64);
-                let x = 0;
-                for (let i = 0; i < 64; i++) {
-                    let barHeight = (dataArray[i] / 255) * 320;
-                    ctx.fillRect(x, (textY - 140) - barHeight, barWidth - 4, barHeight + 5);
-                    x += barWidth;
+                const barWidth = (specW / 60);
+                for (let i = 0; i < 60; i++) {
+                    let barHeight = (dataArray[i] / 255) * specH;
+                    ctx.fillRect(startX + (i * barWidth), specY - barHeight, barWidth - 3, barHeight + 2);
                 }
             } else if (style === 'double-bar') {
-                const barWidth = (canvas.width / 64);
-                let x = 0;
-                for (let i = 0; i < 64; i++) {
-                    let barHeight = (dataArray[i] / 255) * 160;
-                    // Atas Mirror
-                    ctx.fillRect(x, (textY - 140) - barHeight, barWidth - 4, barHeight);
-                    // Bawah Mirror
-                    ctx.fillRect(x, (textY - 140), barWidth - 4, barHeight);
-                    x += barWidth;
+                const barWidth = (specW / 60);
+                for (let i = 0; i < 60; i++) {
+                    let barHeight = (dataArray[i] / 255) * (specH / 2);
+                    ctx.fillRect(startX + (i * barWidth), specY - barHeight, barWidth - 3, barHeight);
+                    ctx.fillRect(startX + (i * barWidth), specY, barWidth - 3, barHeight);
+                }
+            } else if (style === 'updown') {
+                const barWidth = (specW / 50);
+                for (let i = 0; i < 50; i++) {
+                    let h = (dataArray[i] / 255) * specH;
+                    ctx.fillRect(startX + (i * barWidth), specY - (h/2), barWidth - 4, h);
                 }
             } else if (style === 'wave') {
-                ctx.lineWidth = 6;
                 ctx.beginPath();
-                const sliceWidth = canvas.width / bufferLength;
-                let x = 0;
+                const sliceWidth = specW / bufferLength;
+                let x = startX;
                 for (let i = 0; i < bufferLength; i++) {
                     let v = dataArray[i] / 128.0;
-                    let y = (v * 150) + (textY - 200);
+                    let y = specY + (v - 1.0) * specH;
                     if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
                     x += sliceWidth;
                 }
                 ctx.stroke();
-            } else if (style === 'center') {
-                ctx.lineWidth = 8;
-                ctx.beginPath();
-                const sliceWidth = canvas.width / bufferLength;
-                let x = 0;
-                for (let i = 0; i < bufferLength; i++) {
-                    let v = dataArray[i] / 128.0;
-                    let y = (textY - 140) + (v - 1.0) * 400; // Efek lonjakan dari poros tengah
-                    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-                    x += sliceWidth;
+            } else if (style === 'spike') {
+                const step = specW / 40;
+                for(let i=0; i<40; i++) {
+                    let h = (dataArray[i] / 255) * specH;
+                    let xPos = startX + (i * step);
+                    ctx.beginPath(); ctx.moveTo(xPos, specY); ctx.lineTo(xPos, specY - h); ctx.stroke();
                 }
-                ctx.stroke();
+            } else if (style === 'circle') {
+                ctx.beginPath();
+                const centerX = startX + (specW / 2);
+                const baseRadius = specH / 2;
+                for (let i = 0; i < 80; i++) {
+                    let angle = (i / 80) * Math.PI * 2;
+                    let r = baseRadius + (dataArray[i % 40] / 255) * 100;
+                    let x = centerX + Math.cos(angle) * r;
+                    let y = specY + Math.sin(angle) * r;
+                    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                }
+                ctx.closePath(); ctx.stroke();
             }
 
-            ctx.shadowBlur = 0; // Matikan glow agar teks tajam dan bersih
+            ctx.shadowBlur = 0; // Bersihkan agar teks tidak buram
 
-            // Render Hasil Teks Gabungan Akhir
-            ctx.textAlign = "center";
-            ctx.fillStyle = "#ffffff";
-            ctx.font = fontSelect.value;
-            ctx.fillText(artistText.value, canvas.width / 2, textY);
-            
-            ctx.font = "35px sans-serif";
-            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-            ctx.fillText(titleText.value, canvas.width / 2, textY + 55);
+            // Tampilkan Teks
+            const textX = parseInt(textXSlider.value);
+            const textY = parseInt(textYSlider.value);
+            ctx.textAlign = "center"; ctx.fillStyle = "#ffffff";
+            ctx.font = fontSelect.value; ctx.fillText(artistText.value, textX, textY);
+            ctx.font = "35px sans-serif"; ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.fillText(titleText.value, textX, textY + 50);
 
-            // Hitung dan Perbarui Bar Persentase Progres Real-time HP
             if (audioPlayer.duration) {
                 const pct = (audioPlayer.currentTime / audioPlayer.duration) * 100;
                 progressBar.style.width = pct + "%";
@@ -307,73 +314,43 @@
             }
         }
 
-        // Eksekusi Perekaman Media Browser Mobile
         actionBtn.addEventListener('click', async () => {
             if (!isRecording) {
-                isRecording = true;
-                actionBtn.disabled = true;
-                progressContainer.style.display = "block";
-                recordedChunks = [];
-
+                isRecording = true; actionBtn.disabled = true; progressContainer.style.display = "block"; recordedChunks = [];
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    analyser = audioCtx.createAnalyser();
-                    analyser.fftSize = 256;
+                    analyser = audioCtx.createAnalyser(); analyser.fftSize = 256;
                     source = audioCtx.createMediaElementSource(audioPlayer);
-                    source.connect(analyser);
-                    analyser.connect(audioCtx.destination);
+                    source.connect(analyser); analyser.connect(audioCtx.destination);
                 }
-
                 const videoStream = canvas.captureStream(30);
                 const audioStream = audioPlayer.captureStream ? audioPlayer.captureStream() : audioPlayer.webkitCaptureStream();
-                
                 const combinedStream = new MediaStream();
                 videoStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
                 audioStream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
 
                 let options = { mimeType: 'video/webm;codecs=vp8' };
-                if (!MediaRecorder.isTypeSupported(options.mimeType)) {
-                    options = { mimeType: 'video/mp4' };
-                }
+                if (!MediaRecorder.isTypeSupported(options.mimeType)) options = { mimeType: 'video/mp4' };
 
                 mediaRecorder = new MediaRecorder(combinedStream, options);
-                mediaRecorder.ondataavailable = (e) => {
-                    if (e.data && e.data.size > 0) recordedChunks.push(e.data);
-                };
-
+                mediaRecorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) recordedChunks.push(e.data); };
                 mediaRecorder.onstop = () => {
                     cancelAnimationFrame(animationFrameId);
                     const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType });
                     const url = URL.createObjectURL(blob);
-                    
-                    const a = document.createElement('a');
-                    a.href = url;
+                    const a = document.createElement('a'); a.href = url;
                     a.download = `${artistText.value.trim()}_${titleText.value.trim()}.mp4`;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-
-                    statusText.innerText = "Selesai! Video visualisator berhasil masuk ke folder unduhan HP Anda.";
-                    actionBtn.disabled = false;
-                    actionBtn.innerText = "Mulai Rekam Video";
-                    progressContainer.style.display = "none";
-                    isRecording = false;
+                    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                    statusText.innerText = "Selesai! Video berhasil diunduh ke galeri HP Anda.";
+                    actionBtn.disabled = false; actionBtn.innerText = "Mulai Rekam Video";
+                    progressContainer.style.display = "none"; isRecording = false;
                 };
-
-                audioPlayer.play();
-                mediaRecorder.start();
-                renderLoop();
-                actionBtn.innerText = "Sedang Merekam... Jangan Keluar Browser";
+                audioPlayer.play(); mediaRecorder.start(); renderLoop();
+                actionBtn.innerText = "Sedang Merekam... Jangan Tutup Browser";
             }
         });
 
-        audioPlayer.addEventListener('ended', () => {
-            if (mediaRecorder && mediaRecorder.state !== "inactive") {
-                mediaRecorder.stop();
-            }
-        });
-
-        // Render penyesuaian dimensi kanvas pertama kali dimuat
+        audioPlayer.addEventListener('ended', () => { if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop(); });
         drawPreview();
     </script>
 </body>
