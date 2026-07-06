@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Visualizer Studio Pro v8.5</title>
+    <title>Mobile Visualizer Studio Pro v9.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -33,7 +33,7 @@
 <body>
 
     <div class="container">
-        <h2>Mobile Studio Pro v8.5</h2>
+        <h2>Mobile Studio Pro v9.0</h2>
         
         <div class="canvas-container">
             <canvas id="canvas" width="1280" height="720"></canvas>
@@ -59,6 +59,8 @@
                 <option value="cyber">Cyber Rave (Rainbow + Tunnel + Starburst)</option>
                 <option value="chill">Ambient Chill (Emerald + Snow + DNA Helix)</option>
                 <option value="retro">Retro Wave (Ruby Red + Meteor + Radial Radar)</option>
+                <option value="galaxy">Deep Galaxy (Aurora + Orbit + Spiral Galaxy)</option>
+                <option value="inferno">Inferno (Fire Gradient + Bara Api + Mountain)</option>
             </select>
         </div>
 
@@ -98,16 +100,34 @@
                     <option value="dna">DNA Helix Mode</option>
                     <option value="radar">Radial Radar</option>
                     <option value="starburst">Starburst Explosion</option>
+                    <option value="dots">Dot Constellation</option>
+                    <option value="led">LED Panel Grid</option>
+                    <option value="mountain">Mountain Silhouette</option>
+                    <option value="spiral">Spiral Galaxy</option>
+                    <option value="rings">Ripple Rings</option>
+                    <option value="butterfly">Butterfly Wings</option>
+                    <option value="diamond">Diamond Pulse Nest</option>
+                    <option value="fan">Peacock Fan</option>
                 </select>
             </div>
             <div class="control-group">
                 <label>Skema Warna (Transparan)</label>
                 <select id="color-select">
                     <option value="rainbow">Pelangi (Rainbow Pulse)</option>
-                    <option value="rgba(0,240,255,0.65)">Neon Cyan</option>
-                    <option value="rgba(255,0,85,0.65)">Ruby Red</option>
-                    <option value="rgba(0,255,102,0.65)">Lime Emerald</option>
-                    <option value="rgba(255,255,255,0.55)">Crystal White</option>
+                    <option value="fire">Gradasi Api (Merah → Kuning)</option>
+                    <option value="ocean">Gradasi Samudra (Cyan → Biru)</option>
+                    <option value="sunset">Gradasi Senja (Ungu → Oranye)</option>
+                    <option value="aurora">Gradasi Aurora (Hijau → Ungu)</option>
+                    <option value="candy">Gradasi Permen (Pink → Cyan)</option>
+                    <option value="gold">Emas Mewah</option>
+                    <option value="ice">Es Kristal Dingin</option>
+                    <option value="toxic">Toxic Lime</option>
+                    <option value="cyan">Neon Cyan</option>
+                    <option value="ruby">Ruby Red</option>
+                    <option value="emerald">Lime Emerald</option>
+                    <option value="violet">Ungu Violet</option>
+                    <option value="orange">Oranye Neon</option>
+                    <option value="white">Crystal White</option>
                 </select>
             </div>
         </div>
@@ -127,6 +147,11 @@
                     <option value="snow">Snowflake / Salju Lembut</option>
                     <option value="tunnel">Tunnel / Lorong Waktu 3D</option>
                     <option value="chaos">Chaos Pulse / Denyut Acak</option>
+                    <option value="firefly">Firefly / Kunang-Kunang</option>
+                    <option value="rain">Rain / Hujan Deras</option>
+                    <option value="embers">Embers / Bara Api Naik</option>
+                    <option value="orbit">Orbit / Galaksi Berputar</option>
+                    <option value="confetti">Confetti / Warna-Warni</option>
                     <option value="none">Matikan Efek Partikel</option>
                 </select>
             </div>
@@ -141,7 +166,7 @@
         <div class="row">
             <div class="control-group"><label>Jumlah</label><input type="range" id="particle-count" min="10" max="150" value="60"></div>
             <div class="control-group"><label>Ukuran Max</label><input type="range" id="particle-size" min="2" max="15" value="5"></div>
-            <div class="control-group"><label>Kecepatan Dasar</label><input type="range" id="particle-speed" min="0.1" max="15" step="0.1" value="3"></div>
+            <div class="control-group"><label>Kecepatan Dasar</label><input type="range" id="particle-speed" min="0.05" max="15" step="0.05" value="3"></div>
         </div>
         <input type="file" id="bg-custom-input" accept="image/*" style="display: none; margin-top: 5px;">
         
@@ -194,15 +219,25 @@
                 templateSelect.value = 'starburst';
                 particleSpeed.value = '2.5';
             } else if (this.value === 'chill') {
-                colorSelect.value = 'rgba(0,255,102,0.65)';
+                colorSelect.value = 'emerald';
                 particleType.value = 'snow';
                 templateSelect.value = 'dna';
                 particleSpeed.value = '0.5';
             } else if (this.value === 'retro') {
-                colorSelect.value = 'rgba(255,0,85,0.65)';
+                colorSelect.value = 'ruby';
                 particleType.value = 'meteor';
                 templateSelect.value = 'radar';
                 particleSpeed.value = '5.0';
+            } else if (this.value === 'galaxy') {
+                colorSelect.value = 'aurora';
+                particleType.value = 'orbit';
+                templateSelect.value = 'spiral';
+                particleSpeed.value = '1.2';
+            } else if (this.value === 'inferno') {
+                colorSelect.value = 'fire';
+                particleType.value = 'embers';
+                templateSelect.value = 'mountain';
+                particleSpeed.value = '2.0';
             }
             initParticles();
             drawPreview();
@@ -276,7 +311,9 @@
             const maxSize = parseInt(particleSize.value);
 
             particles.forEach(p => {
-                let currentSpeed = (sliderSpeed * p.speedFactor) + (audioIntensity * 25);
+                // Dorongan dari musik kini proporsional dengan kecepatan dasar,
+                // sehingga setting lambat benar-benar terasa lambat.
+                let currentSpeed = (sliderSpeed * p.speedFactor) + (audioIntensity * 6 * Math.min(4, sliderSpeed));
                 let currentSize = p.size + (audioIntensity * (maxSize * 1.5));
                 let drawX = p.x;
                 let drawY = p.y;
@@ -315,11 +352,58 @@
                     finalAlpha = Math.min(1, (p.alpha * 0.3) + (audioIntensity * 1.2));
                     currentSize = p.size + (audioIntensity * maxSize * 3.5);
                 }
+                else if (type === 'firefly') {
+                    p.angle += 0.01 + currentSpeed * 0.002;
+                    p.x += Math.sin(p.angle * 1.3) * currentSpeed * 0.35;
+                    p.y += Math.cos(p.angle) * currentSpeed * 0.28;
+                    if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+                    drawX = p.x; drawY = p.y;
+                    finalAlpha = Math.max(0.05, finalAlpha * (0.3 + 0.7 * Math.abs(Math.sin(Date.now() / 300 + p.angle * 7))));
+                }
+                else if (type === 'rain') {
+                    p.y += currentSpeed * 2.2;
+                    p.x -= currentSpeed * 0.35;
+                    if (p.y > canvas.height) { p.y = -20; p.x = Math.random() * (canvas.width + 150); }
+                    drawX = p.x; drawY = p.y;
+                }
+                else if (type === 'embers') {
+                    p.y -= currentSpeed * 0.5;
+                    p.angle += 0.03;
+                    drawX += Math.sin(p.angle) * 3;
+                    finalAlpha = Math.min(1, finalAlpha * (0.55 + 0.45 * Math.sin(Date.now() / 150 + p.angle * 5)));
+                    if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+                }
+                else if (type === 'orbit') {
+                    if (p.orbitR === undefined) { p.orbitR = 60 + Math.random() * 330; p.orbitA = Math.random() * Math.PI * 2; }
+                    p.orbitA += currentSpeed * 0.003 * (p.speedFactor + 0.3);
+                    drawX = canvas.width / 2 + Math.cos(p.orbitA) * p.orbitR * 1.6;
+                    drawY = canvas.height / 2 + Math.sin(p.orbitA) * p.orbitR * 0.7;
+                }
+                else if (type === 'confetti') {
+                    p.y += currentSpeed * 0.6;
+                    p.angle += 0.05 + currentSpeed * 0.01;
+                    drawX += Math.sin(p.angle) * 5;
+                    if (p.y > canvas.height) { p.y = -10; p.x = Math.random() * canvas.width; }
+                }
 
-                ctx.beginPath();
-                ctx.arc(drawX, drawY, Math.max(0.5, currentSize), 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${finalAlpha})`;
-                ctx.fill();
+                if (type === 'rain') {
+                    ctx.strokeStyle = `rgba(170, 210, 255, ${finalAlpha * 0.85})`;
+                    ctx.lineWidth = Math.max(1, currentSize * 0.35);
+                    ctx.beginPath();
+                    ctx.moveTo(drawX, drawY);
+                    ctx.lineTo(drawX - currentSpeed, drawY + 14 + currentSpeed * 2.5);
+                    ctx.stroke();
+                } else {
+                    let pColor = `rgba(255, 255, 255, ${finalAlpha})`;
+                    if (type === 'embers') pColor = `hsla(${12 + (p.angle * 40) % 30}, 100%, 55%, ${finalAlpha})`;
+                    else if (type === 'firefly') pColor = `hsla(${65 + (p.size * 12) % 40}, 100%, 65%, ${finalAlpha})`;
+                    else if (type === 'confetti') pColor = `hsla(${(p.speedFactor * 900) % 360}, 90%, 62%, ${finalAlpha})`;
+                    ctx.beginPath();
+                    ctx.arc(drawX, drawY, Math.max(0.5, currentSize), 0, Math.PI * 2);
+                    ctx.fillStyle = pColor;
+                    ctx.fill();
+                }
             });
         }
 
@@ -379,11 +463,30 @@
             const specY = parseInt(specYSlider.value); const specW = parseInt(specWSlider.value);
             const specH = parseInt(specHSlider.value); const chosenColor = colorSelect.value;
 
-            // Logika Warna Pelangi Alternatif Dinamis
-            let dynamicColor = chosenColor;
-            if(chosenColor === 'rainbow') {
-                dynamicColor = `hsla(${(Date.now() / 25) % 360}, 100%, 60%, 0.75)`;
+            // Mesin Warna Terpusat: mendukung warna solid & gradasi per-segmen
+            function segColor(i, total) {
+                const f = (((i % total) + total) % total) / total;
+                const t = Date.now();
+                switch (chosenColor) {
+                    case 'rainbow': return `hsla(${(f * 360 + t / 20) % 360}, 100%, 60%, 0.75)`;
+                    case 'fire':    return `hsla(${f * 55}, 100%, ${50 + f * 15}%, 0.8)`;
+                    case 'ocean':   return `hsla(${175 + f * 65}, 100%, 55%, 0.75)`;
+                    case 'sunset':  return `hsla(${(285 + f * 130) % 360}, 100%, 60%, 0.8)`;
+                    case 'aurora':  return `hsla(${120 + f * 160}, 100%, 60%, 0.75)`;
+                    case 'candy':   return `hsla(${(320 + f * 220) % 360}, 95%, 68%, 0.8)`;
+                    case 'gold':    return `hsla(${38 + f * 18}, 100%, ${52 + f * 18}%, 0.8)`;
+                    case 'ice':     return `hsla(${185 + f * 35}, 85%, ${65 + f * 20}%, 0.8)`;
+                    case 'toxic':   return `hsla(${75 + f * 45}, 100%, 55%, 0.8)`;
+                    case 'cyan':    return 'rgba(0,240,255,0.65)';
+                    case 'ruby':    return 'rgba(255,0,85,0.65)';
+                    case 'emerald': return 'rgba(0,255,102,0.65)';
+                    case 'violet':  return 'rgba(190,80,255,0.7)';
+                    case 'orange':  return 'rgba(255,140,0,0.7)';
+                    case 'white':   return 'rgba(255,255,255,0.55)';
+                    default:        return chosenColor;
+                }
             }
+            const dynamicColor = segColor(30, 60);
 
             ctx.fillStyle = dynamicColor; ctx.strokeStyle = dynamicColor;
             ctx.lineWidth = 5; ctx.shadowBlur = 15; ctx.shadowColor = dynamicColor;
@@ -394,14 +497,14 @@
             if (style === 'bar') {
                 const barWidth = (specW / 60);
                 for (let i = 0; i < 60; i++) {
-                    if (chosenColor === 'rainbow') ctx.fillStyle = `hsla(${(i * 5 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.fillStyle = segColor(i, 60);
                     let barHeight = (dataArray[i] / 255) * specH;
                     ctx.fillRect(startX + (i * barWidth), specY - barHeight, barWidth - 3, barHeight + 2);
                 }
             } else if (style === 'double-bar') {
                 const barWidth = (specW / 60);
                 for (let i = 0; i < 60; i++) {
-                    if (chosenColor === 'rainbow') { ctx.fillStyle = `hsla(${(i * 5 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`; }
+                    ctx.fillStyle = segColor(i, 60);
                     let barHeight = (dataArray[i] / 255) * (specH / 2);
                     ctx.fillRect(startX + (i * barWidth), specY - barHeight, barWidth - 3, barHeight);
                     ctx.fillRect(startX + (i * barWidth), specY, barWidth - 3, barHeight);
@@ -409,7 +512,7 @@
             } else if (style === 'updown') {
                 const barWidth = (specW / 50);
                 for (let i = 0; i < 50; i++) {
-                    if (chosenColor === 'rainbow') ctx.fillStyle = `hsla(${(i * 6 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.fillStyle = segColor(i, 50);
                     let h = (dataArray[i] / 255) * specH;
                     ctx.fillRect(startX + (i * barWidth), specY - (h/2), barWidth - 4, h);
                 }
@@ -424,7 +527,7 @@
             } else if (style === 'spike') {
                 const step = specW / 40;
                 for(let i=0; i<40; i++) {
-                    if (chosenColor === 'rainbow') ctx.strokeStyle = `hsla(${(i * 8 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.strokeStyle = segColor(i, 40);
                     let h = (dataArray[i] / 255) * specH;
                     let xPos = startX + (i * step);
                     ctx.beginPath(); ctx.moveTo(xPos, specY); ctx.lineTo(xPos, specY - h); ctx.stroke();
@@ -441,7 +544,7 @@
                 const barWidth = (specW / 2) / 30;
                 const centerX = startX + (specW / 2);
                 for(let i=0; i<30; i++) {
-                    if (chosenColor === 'rainbow') ctx.fillStyle = `hsla(${(i * 10 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.fillStyle = segColor(i, 30);
                     let h = (dataArray[i] / 255) * specH;
                     ctx.fillRect(centerX + (i * barWidth), specY - h, barWidth - 3, h + 2);
                     ctx.fillRect(centerX - (i * barWidth) - barWidth, specY - h, barWidth - 3, h + 2);
@@ -458,7 +561,7 @@
             } else if (style === 'block') {
                 const barWidth = (specW / 40);
                 for (let i = 0; i < 40; i++) {
-                    if (chosenColor === 'rainbow') ctx.fillStyle = `hsla(${(i * 8 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.fillStyle = segColor(i, 40);
                     let blocks = Math.floor((dataArray[i] / 255) * 10);
                     for(let b=0; b<blocks; b++) {
                         ctx.fillRect(startX + (i * barWidth), specY - (b * (specH / 12)), barWidth - 4, (specH / 15));
@@ -469,7 +572,7 @@
             else if (style === 'dna') {
                 const points = 40; const step = specW / points;
                 for(let i=0; i<points; i++) {
-                    if (chosenColor === 'rainbow') ctx.fillStyle = `hsla(${(i * 9 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.fillStyle = segColor(i, 40); ctx.strokeStyle = segColor(i, 40);
                     let h = (dataArray[i % 30] / 255) * (specH / 2);
                     let xPos = startX + (i * step);
                     let offset = Math.sin(i * 0.5 + Date.now() / 300) * h;
@@ -486,7 +589,7 @@
                 for(let i=0; i<lines; i++) {
                     let angle = (i / lines) * Math.PI * 2 + (Date.now() / 2000);
                     let intensity = (dataArray[i % 40] / 255) * maxRadius;
-                    if (chosenColor === 'rainbow') ctx.strokeStyle = `hsla(${(i * 6 + Date.now() / 20) % 360}, 100%, 60%, 0.75)`;
+                    ctx.strokeStyle = segColor(i, lines);
                     ctx.beginPath(); ctx.moveTo(centerX, specY);
                     ctx.lineTo(centerX + Math.cos(angle) * intensity, specY + Math.sin(angle) * intensity);
                     ctx.stroke();
@@ -499,11 +602,120 @@
                 for(let i=0; i<rays; i++) {
                     let angle = (i / rays) * Math.PI * 2;
                     let len = (dataArray[i % 32] / 255) * specH * 0.7;
-                    if (chosenColor === 'rainbow') ctx.strokeStyle = `hsla(${(i * 5 + Date.now() / 15) % 360}, 100%, 60%, 0.8)`;
+                    ctx.strokeStyle = segColor(i, rays);
                     ctx.beginPath();
                     ctx.moveTo(centerX + Math.cos(angle) * innerR, specY + Math.sin(angle) * innerR);
                     ctx.lineTo(centerX + Math.cos(angle) * (innerR + len), specY + Math.sin(angle) * (innerR + len));
                     ctx.stroke();
+                }
+            }
+            // 4. BARU: Dot Constellation
+            else if (style === 'dots') {
+                const cols = 60; const dw = specW / cols;
+                for (let i = 0; i < cols; i++) {
+                    ctx.fillStyle = segColor(i, cols);
+                    let h = (dataArray[i] / 255) * specH;
+                    let x = startX + i * dw + dw / 2;
+                    ctx.beginPath(); ctx.arc(x, specY - h, 6, 0, Math.PI * 2); ctx.fill();
+                    ctx.globalAlpha = 0.45;
+                    ctx.beginPath(); ctx.arc(x, specY - h * 0.55, 3.5, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(x, specY - h * 0.2, 2, 0, Math.PI * 2); ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+            // 5. BARU: LED Panel Grid
+            else if (style === 'led') {
+                const cols = 32, rows = 12;
+                const cw = specW / cols, chh = specH / rows;
+                ctx.shadowBlur = 0;
+                for (let i = 0; i < cols; i++) {
+                    let level = Math.round((dataArray[Math.floor(i * 1.5)] / 255) * rows);
+                    for (let r = 0; r < rows; r++) {
+                        ctx.fillStyle = (r < level) ? segColor(i, cols) : 'rgba(255,255,255,0.06)';
+                        ctx.fillRect(startX + i * cw, specY - (r + 1) * chh, cw - 3, chh - 3);
+                    }
+                }
+            }
+            // 6. BARU: Mountain Silhouette
+            else if (style === 'mountain') {
+                const grad = ctx.createLinearGradient(startX, 0, startX + specW, 0);
+                for (let s = 0; s <= 4; s++) grad.addColorStop(s / 4, segColor(s * 15, 60));
+                ctx.fillStyle = grad; ctx.strokeStyle = grad;
+                ctx.beginPath(); ctx.moveTo(startX, specY);
+                const pts = 60; const pw = specW / pts;
+                for (let i = 0; i <= pts; i++) {
+                    let h = (dataArray[Math.min(i, pts - 1)] / 255) * specH;
+                    ctx.lineTo(startX + i * pw, specY - h);
+                }
+                ctx.lineTo(startX + specW, specY); ctx.closePath();
+                ctx.globalAlpha = 0.55; ctx.fill(); ctx.globalAlpha = 1;
+                ctx.lineWidth = 3; ctx.stroke(); ctx.lineWidth = 5;
+            }
+            // 7. BARU: Spiral Galaxy
+            else if (style === 'spiral') {
+                const cX = startX + specW / 2; const n = 110;
+                for (let i = 0; i < n; i++) {
+                    ctx.fillStyle = segColor(i, n);
+                    let ang = i * 0.32 + Date.now() / 1200;
+                    let r = (i / n) * specH * 0.75 + (dataArray[i % 50] / 255) * 35;
+                    let sz = 2 + (dataArray[i % 50] / 255) * 5;
+                    ctx.beginPath();
+                    ctx.arc(cX + Math.cos(ang) * r, specY + Math.sin(ang) * r * 0.7, sz, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            // 8. BARU: Ripple Rings
+            else if (style === 'rings') {
+                const cX = startX + specW / 2; const ringN = 6;
+                for (let k = 0; k < ringN; k++) {
+                    let sum2 = 0; for (let j = 0; j < 8; j++) sum2 += dataArray[k * 8 + j];
+                    let avg = sum2 / 8 / 255;
+                    ctx.strokeStyle = segColor(k, ringN);
+                    ctx.lineWidth = 2 + avg * 8;
+                    ctx.beginPath();
+                    ctx.arc(cX, specY, 20 + k * (specH / 8) + avg * 45, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                ctx.lineWidth = 5;
+            }
+            // 9. BARU: Butterfly Wings
+            else if (style === 'butterfly') {
+                const cX = startX + specW / 2; const wings = 60;
+                for (let i = 0; i < wings; i++) {
+                    let ang = (i / (wings - 1)) * Math.PI - Math.PI / 2;
+                    let petal = Math.abs(Math.sin(ang * 2)) + 0.2;
+                    let len = (dataArray[i % 40] / 255) * specH * 0.7 * petal;
+                    let dx = Math.cos(ang) * len, dy = Math.sin(ang) * len;
+                    ctx.strokeStyle = segColor(i, wings);
+                    ctx.beginPath(); ctx.moveTo(cX, specY); ctx.lineTo(cX + dx, specY + dy); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(cX, specY); ctx.lineTo(cX - dx, specY + dy); ctx.stroke();
+                }
+            }
+            // 10. BARU: Diamond Pulse Nest
+            else if (style === 'diamond') {
+                const cX = startX + specW / 2; const nests = 8;
+                for (let k = 0; k < nests; k++) {
+                    let v = dataArray[k * 6] / 255;
+                    let s = (k + 1) * (specH / 9) + v * 40;
+                    ctx.strokeStyle = segColor(k, nests);
+                    ctx.lineWidth = 2 + v * 6;
+                    ctx.beginPath();
+                    ctx.moveTo(cX, specY - s); ctx.lineTo(cX + s, specY);
+                    ctx.lineTo(cX, specY + s); ctx.lineTo(cX - s, specY);
+                    ctx.closePath(); ctx.stroke();
+                }
+                ctx.lineWidth = 5;
+            }
+            // 11. BARU: Peacock Fan
+            else if (style === 'fan') {
+                const cX = startX + specW / 2; const blades = 48;
+                for (let i = 0; i < blades; i++) {
+                    let ang = Math.PI + (i / (blades - 1)) * Math.PI;
+                    let len = 30 + (dataArray[i % 40] / 255) * specH * 0.9;
+                    let ex = cX + Math.cos(ang) * len, ey = specY + Math.sin(ang) * len;
+                    ctx.strokeStyle = segColor(i, blades); ctx.fillStyle = segColor(i, blades);
+                    ctx.beginPath(); ctx.moveTo(cX, specY); ctx.lineTo(ex, ey); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(ex, ey, 4, 0, Math.PI * 2); ctx.fill();
                 }
             }
 
